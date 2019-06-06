@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+    {% for day in chart_data %}
+        {% include '_day.html' %}
+    {% endfor %}
+
+{% endblock %}

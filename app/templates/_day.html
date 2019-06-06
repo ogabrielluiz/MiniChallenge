@@ -1,0 +1,14 @@
+<table class="table table-hover">
+        <tr>
+
+            <td>
+                <h1>Data: {{ day.date }}</h1><br>
+
+                {% for chart in chart_list %}
+
+                    <h2>{{ chart.title }}</h2>
+                    {{ chart.render()|safe }}
+
+                {% endfor %}
+        </tr>
+    </table>
