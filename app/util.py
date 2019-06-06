@@ -47,12 +47,12 @@ def prepare_data(listed_data):
         for obs in listed_data:
             if observation != obs:
                 if observation.date == obs.date:
-                    observation.set_data(obs, graph=True)
+                    observation.set_data(obs, avg=True)
 
         prepared_data.append(observation)
         if len(prepared_data) > 1:
             if observation.date == prepared_data[-2].date:
-                prepared_data[-2].set_data(observation, graph=True)
+                prepared_data[-2].set_data(observation, avg=True)
                 del prepared_data[-1]
 
     set_avg_hu_on_all_days(prepared_data)
@@ -62,7 +62,7 @@ def set_avg_hu_on_all_days(data):
 
     for day in data:
         avg_humidity = sum(day.humidity) / len(day.humidity)
-        day.set_avg(avg_humidity)
+        day.avg_humidity = int(avg_humidity)
 
     return data
 

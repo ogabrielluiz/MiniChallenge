@@ -9,12 +9,11 @@ from datetime import datetime
 @app.route('/index')
 def index():
 
-
     data = get_weather()
     list_of_observations = []
     for observation in data:
         fcast = Forecast()
-        fcast.set_data(observation, graph=False)
+        fcast.set_data(observation, avg=False)
         fcast.get_rain_forecast()
         list_of_observations.append(fcast)
 
