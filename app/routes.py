@@ -1,7 +1,8 @@
 from app import app
 from flask import render_template
 from app.models import Forecast
-from app.util import get_weather, prepare_data, create_graph
+from app.util import get_weather, prepare_data
+from datetime import datetime
 
 
 @app.route('/')
@@ -17,11 +18,11 @@ def index():
         fcast.get_rain_forecast()
         list_of_observations.append(fcast)
 
-    chart_data = prepare_data(list_of_observations)
+    prepared_data = prepare_data(list_of_observations)
 
-    chart_list = create_graph(chart_data)
+    today_date = datetime.today().date()
 
-    return render_template('index.html', chart_data=chart_data, chart_list=chart_list)
+    return render_template('index.html', prepared_data=prepared_data, today_date=today_date)
 
 
 if __name__ == '__main__':
