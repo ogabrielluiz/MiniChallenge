@@ -2,8 +2,9 @@
 
 {% block app_content %}
 
-    {% for day in chart_data %}
+    <div class="row">
+    {% for day in prepared_data %}
         {% include '_day.html' %}
     {% endfor %}
-
+    </div>
 {% endblock %}
