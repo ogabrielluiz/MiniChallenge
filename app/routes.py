@@ -14,12 +14,11 @@ def index():
     for observation in data:
         fcast = Forecast()
         fcast.set_data(observation, avg=False)
-        fcast.get_rain_forecast()
         list_of_observations.append(fcast)
 
     prepared_data = prepare_data(list_of_observations)
 
-    today_date = datetime.today().date()
+    today_date = datetime.today().date().strftime('%d/%m')
 
     return render_template('index.html', prepared_data=prepared_data, today_date=today_date)
 

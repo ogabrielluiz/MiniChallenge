@@ -9,7 +9,7 @@ verify_ssl = true
 flask = "*"
 requests = "*"
 python-dotenv = "*"
-flask-bootstrap = "*"
+flask-bootstrap4 = "*"
 pygal = "*"
 
 [requires]

@@ -1,10 +1,33 @@
-<div class="card" style="width: 18rem;">
-    <div class="card-header">{{ day.weekday }}</div>
-    <ul class="list-group list-group-flush">
+{% if day.umbrella == True and today_date == day.date %}
+<div class="card text-white bg-dark border-warning style="width: 18rem;">
+    <div class="card-header bg-warning">
+    {% elif day.umbrella == True %}
+<div class="card text-white bg-dark " style="width: 18rem;">
+    <div class="card-header">
+    {% elif day.umbrella == False and today_date == day.date %}
+<div class="card text-white bg-primary border-warning" style="width: 18rem;">
+    <div class="card-header text-dark bg-warning">
+    {% elif day.umbrella == False%}
+<div class="card text-white bg-primary" style="width: 18rem;">
+    <div class="card-header">
+    {%  endif %}
 
-        <li class="list-group-item"> Humidity: {{ day.avg_humidity }}%</li>
-        <li class="list-group-item">Min.: {{ day.temp_min }}°C</li>
-        <li class="list-group-item">Max.: {{ day.temp_max }}°C</li>
+        {{ day.weekday }} ({{ day.date }})
+    </div>
+    <ul class="list-group list-group-flush text-white bg-primary">
+    {% if day.umbrella == True %}
+<li class="list-group-item text-white bg-dark "> Humidity: {{ day.avg_humidity }}%</li>
+        <li class="list-group-item bg-dark">Min.: {{ day.temp_min }}°C</li>
+        <li class="list-group-item bg-dark">Max.: {{ day.temp_max }}°C</li>
+        <li class="list-group-item text-white bg-dark text-center ">{{ day.text }}</li>
+    {% else %}
+<li class="list-group-item text-white bg-primary"> Humidity: {{ day.avg_humidity }}%</li>
+        <li class="list-group-item bg-primary ">Min.: {{ day.temp_min }}°C</li>
+        <li class="list-group-item bg-primary ">Max.: {{ day.temp_max }}°C</li>
+        <li class="list-group-item bg-primary text-center ">{{ day.text }}</li>
+    {%  endif %}
+
+
     </ul>
 
 </div>

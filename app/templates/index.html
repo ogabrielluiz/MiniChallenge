@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-
-    <div class="row">
-        <div class="col-md-2">
+<div class="container">
+    <div class="row mt-5">
+    <div class="col-15">
+        <div class="card-deck">
         {% for day in prepared_data %}
             {% include '_day.html' %}
         {% endfor %}
         </div>
     </div>
+    </div>
+</div>
 {% endblock %}

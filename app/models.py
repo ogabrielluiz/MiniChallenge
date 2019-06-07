@@ -17,6 +17,7 @@ class Forecast:
         self.text = []
         self.avg_humidity = None
         self.weekday = ''
+        self.umbrella = False
 
     def set_data(self, data, avg):
         if avg:
@@ -29,11 +30,11 @@ class Forecast:
         else:
             date = convert_date(data['dt'])
             self.humidity.append(data['main']['humidity'])
-            self.date = str(date.date().strftime('%d-%m'))
+            self.date = str(date.date().strftime('%d/%m'))
             self.hour.append(date.hour)
-            self.temp_max = data['main']['temp_max']
-            self.temp = data['main']['temp']
-            self.temp_min = data['main']['temp_min']
+            self.temp_max = int(data['main']['temp_max'])
+            self.temp = int(data['main']['temp'])
+            self.temp_min = int(data['main']['temp_min'])
             self.cloudiness.append(data['clouds']['all'])
             self.wind_speed.append(data['wind']['speed'])
             self.wind_deg.append(data['wind']['deg'])
@@ -41,19 +42,19 @@ class Forecast:
             self.weekday = get_weekday(date)
 
     def get_rain_forecast(self):
-        for i in range(len(self.humidity)):
 
-            if self.humidity[i] == 0:
-                self.text.append("No chance of rain")
-
-            elif self.humidity[i] < 15:
-                self.text.append("Slight chance of isolated rains")
-            elif 15 <= self.humidity[i] < 30:
-                self.text.append("A small chance of rain")
-            elif 30 <= self.humidity[i] < 60:
-                self.text.append("A small chance of rain")
-            elif 60 <= self.humidity[i] < 80:
-                self.text.append("Scattered rain")
-            elif 80 <= self.humidity[i]:
-                self.text.append("Rainy (strong or weak)")
+        if self.avg_humidity == 0:
+            self.text = "No chance of rain"
+        elif self.avg_humidity < 15:
+            self.text = "Slight chance of isolated rains"
+        elif 15 <= self.avg_humidity < 30:
+            self.text = "A small chance of rain"
+        elif 30 <= self.avg_humidity < 60:
+            self.text = "A small chance of rain"
+        elif 60 <= self.avg_humidity < 80:
+            self.text = "Scattered rain"
+        elif 80 <= self.avg_humidity:
+            self.text = "Rainy (strong or weak)"
+        if self.avg_humidity > 70:
+            self.umbrella = True
 

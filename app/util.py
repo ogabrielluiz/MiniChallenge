@@ -56,6 +56,8 @@ def prepare_data(listed_data):
                 del prepared_data[-1]
 
     set_avg_hu_on_all_days(prepared_data)
+    set_rain_forecast(prepared_data)
+
     return prepared_data
 
 def set_avg_hu_on_all_days(data):
@@ -63,6 +65,13 @@ def set_avg_hu_on_all_days(data):
     for day in data:
         avg_humidity = sum(day.humidity) / len(day.humidity)
         day.avg_humidity = int(avg_humidity)
+
+    return data
+
+def set_rain_forecast(data):
+
+    for day in data:
+        day.get_rain_forecast()
 
     return data
 
