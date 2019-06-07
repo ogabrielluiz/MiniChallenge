@@ -1,15 +1,14 @@
+from datetime import datetime
+
 import requests
-from pygal.style import CleanStyle
 
 from app import app
-from datetime import datetime
-import pygal
 
 
 def get_weather():
-    API_KEY = app.config['API_KEY']
+    api_key = app.config['API_KEY']
     cidade = 'Ribeirão+Preto'
-    url = f'http://api.openweathermap.org/data/2.5/forecast?q={cidade}' + f'&APPID={API_KEY}' + "&units=metric"
+    url = f'http://api.openweathermap.org/data/2.5/forecast?q={cidade}' + f'&APPID={api_key}' + "&units=metric"
 
     response = requests.get(url)
     data = response.json()
@@ -22,23 +21,6 @@ def convert_date(date):
     timestamp = int(date)
     date = datetime.utcfromtimestamp(timestamp)
     return date
-
-
-# def create_graph(prepared_data):
-#     chart_list = []
-#     for data in prepared_data:
-#         title = f'{data.date}'
-#         chart = pygal.Line(width=800,
-#                            height=600,
-#                            range=(0, 100),
-#                            title=title,
-#                            style=CleanStyle)
-#         chart.x_labels = data.hour
-#         chart.add('Humidity in %', data.humidity)
-#
-#         chart_list.append(chart)
-#
-#     return chart_list
 
 
 def prepare_data(listed_data):
@@ -55,21 +37,41 @@ def prepare_data(listed_data):
                 prepared_data[-2].set_data(observation, avg=True)
                 del prepared_data[-1]
 
-    set_avg_hu_on_all_days(prepared_data)
-    set_rain_forecast(prepared_data)
+    prepared_data = set_avgs_on_all_days(prepared_data)
+    prepared_data = set_rain_forecast(prepared_data)
+    prepared_data = set_max_min_temp(prepared_data)
 
     return prepared_data
 
-def set_avg_hu_on_all_days(data):
 
+def set_avgs_on_all_days(data):
     for day in data:
         avg_humidity = sum(day.humidity) / len(day.humidity)
+        avg_wind_speed = sum(day.wind_speed) / len(day.wind_speed)
+        avg_wind_deg = sum(day.wind_deg) / len(day.wind_deg)
+        avg_cloudiness = sum(day.cloudiness) / len(day.cloudiness)
+        avg_pressure = sum(day.pressure) / len(day.pressure)
+
         day.avg_humidity = int(avg_humidity)
+        day.avg_wind_speed = round(avg_wind_speed, 2)
+        day.avg_wind_deg = int(avg_wind_deg)
+        day.avg_cloudiness = int(avg_cloudiness)
+        day.avg_pressure = round(avg_pressure, 2)
 
     return data
 
-def set_rain_forecast(data):
 
+def set_max_min_temp(data):
+    for day in data:
+        lowest = min(day.temp_min)
+        highest = max(day.temp_max)
+
+        day.temp_min = lowest
+        day.temp_max = highest
+    return data
+
+
+def set_rain_forecast(data):
     for day in data:
         day.get_rain_forecast()
 

@@ -1,33 +1,46 @@
 {% if day.umbrella == True and today_date == day.date %}
-<div class="card text-white bg-dark border-warning style="width: 18rem;">
-    <div class="card-header bg-warning">
-    {% elif day.umbrella == True %}
-<div class="card text-white bg-dark " style="width: 18rem;">
-    <div class="card-header">
-    {% elif day.umbrella == False and today_date == day.date %}
-<div class="card text-white bg-primary border-warning" style="width: 18rem;">
-    <div class="card-header text-dark bg-warning">
-    {% elif day.umbrella == False%}
-<div class="card text-white bg-primary" style="width: 18rem;">
-    <div class="card-header">
-    {%  endif %}
+    <div class="card text-white bg-dark border-secondary" style="width: 18rem;"/>">
+    <div class="card-header bg-secondary">
 
-        {{ day.weekday }} ({{ day.date }})
-    </div>
-    <ul class="list-group list-group-flush text-white bg-primary">
+{% elif day.umbrella == True %}
+    <div class="card text-white bg-dark " style="width: 18rem;">
+    <div class="card-header">
+{% elif day.umbrella == False and today_date == day.date %}
+    <div class="card text-white bg-primary border-secondary" style="width: 18rem;">
+    <div class="card-header text-white bg-secondary">
+{% elif day.umbrella == False %}
+    <div class="card text-white bg-primary" style="width: 18rem;">
+    <div class="card-header">
+{% endif %}
+
+{{ day.weekday }} ({{ day.date }})
+</div>
+<ul class="list-group list-group-flush text-white bg-primary">
     {% if day.umbrella == True %}
-<li class="list-group-item text-white bg-dark "> Humidity: {{ day.avg_humidity }}%</li>
+
+        <li class="list-group-item text-white bg-secondary text-center ">{{ day.text }}</li>
+        <li class="list-group-item text-white bg-dark "> Humidity: {{ day.avg_humidity }}%</li>
+        <li class="list-group-item bg-dark">Wind speed: {{ day.avg_wind_speed }} m/s</li>
+        <li class="list-group-item bg-dark">Wind direction: {{ day.avg_wind_deg }}°</li>
         <li class="list-group-item bg-dark">Min.: {{ day.temp_min }}°C</li>
         <li class="list-group-item bg-dark">Max.: {{ day.temp_max }}°C</li>
-        <li class="list-group-item text-white bg-dark text-center ">{{ day.text }}</li>
+        <li class="list-group-item bg-dark">Cloudiness: {{ day.avg_cloudiness }}%</li>
+        <li class="list-group-item bg-dark">Pressure: {{ day.avg_pressure }} hPa</li>
+
     {% else %}
-<li class="list-group-item text-white bg-primary"> Humidity: {{ day.avg_humidity }}%</li>
-        <li class="list-group-item bg-primary ">Min.: {{ day.temp_min }}°C</li>
-        <li class="list-group-item bg-primary ">Max.: {{ day.temp_max }}°C</li>
-        <li class="list-group-item bg-primary text-center ">{{ day.text }}</li>
-    {%  endif %}
+
+        <li class="list-group-item text-white bg-info text-center">{{ day.text }}</li>
+        <li class="list-group-item text-white bg-primary"> Humidity: {{ day.avg_humidity }}%</li>
+        <li class="list-group-item bg-primary">Wind speed: {{ day.avg_wind_speed }} m/s</li>
+        <li class="list-group-item bg-primary">Wind direction: {{ day.avg_wind_deg }}°</li>
+        <li class="list-group-item bg-primary">Min.: {{ day.temp_min }}°C</li>
+        <li class="list-group-item bg-primary">Max.: {{ day.temp_max }}°C</li>
+        <li class="list-group-item bg-primary">Cloudiness: {{ day.avg_cloudiness }}%</li>
+        <li class="list-group-item bg-primary">Pressure: {{ day.avg_pressure }} hPa</li>
+
+    {% endif %}
 
 
-    </ul>
+</ul>
 
 </div>

@@ -1,14 +1,14 @@
 {% extends 'bootstrap/base.html' %}
 
 {% block title %}
-    {% if title %}{{ title }} - Vai chover em Ribeirão?{% else %}Vai chover em Ribeirão?{% endif %}
+    {% if title %}{{ title }} - Will it rain in Ribeirão Preto?{% else %}Will it rain in Ribeirão Preto?{% endif %}
 {% endblock %}
 
 {% block navbar %}
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark mx-auto">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand pull-sm-left" href="{{ url_for('index') }}">Vai chover em Ribeirão?</a>
+                <a class="navbar-brand pull-sm-left" href="{{ url_for('index') }}">Will it rain in Ribeirão Preto?</a>
             </div>
         </div>
     </nav>
@@ -17,11 +17,11 @@
 {% block content %}
     <div class="container">
         {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-info" role="alert">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info" role="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
         {% endwith %}
 
         {# application content needs to be provided in the app_content block #}
