@@ -3,8 +3,10 @@
 {% block app_content %}
 
     <div class="row">
-    {% for day in prepared_data %}
-        {% include '_day.html' %}
-    {% endfor %}
+        <div class="col-md-2">
+        {% for day in prepared_data %}
+            {% include '_day.html' %}
+        {% endfor %}
+        </div>
     </div>
 {% endblock %}

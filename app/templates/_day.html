@@ -1,13 +1,10 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-header">{{ day.weekday }}</div>
+    <ul class="list-group list-group-flush">
 
-    <div class="col-md">
-        <div class="card bg-light text-dark">
-            {% if day.date == today_date %}
-            {% endif %}
-            <h5 class="card-title">{{ day.weekday }}(</h5>
-    <div class="card-body">
-        Humidity: {{ day.avg_humidity }}%<br>
-        Min.: {{ day.temp_min }}°C<br>
-        Max.: {{ day.temp_max }}°C<br>
-        </div>
-  </div>
-    </div>
+        <li class="list-group-item"> Humidity: {{ day.avg_humidity }}%</li>
+        <li class="list-group-item">Min.: {{ day.temp_min }}°C</li>
+        <li class="list-group-item">Max.: {{ day.temp_max }}°C</li>
+    </ul>
+
+</div>

@@ -67,7 +67,8 @@ def set_avg_hu_on_all_days(data):
     return data
 
 
-def get_weekday(date):
+def get_weekday(day):
+    date = day.weekday()
     if date == 0:
         return "Monday"
     if date == 1:

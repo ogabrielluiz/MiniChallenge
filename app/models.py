@@ -16,7 +16,7 @@ class Forecast:
         self.pressure = []
         self.text = []
         self.avg_humidity = None
-        self.weekday = None
+        self.weekday = ''
 
     def set_data(self, data, avg):
         if avg:
