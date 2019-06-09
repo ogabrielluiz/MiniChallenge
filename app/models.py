@@ -23,6 +23,9 @@ class Forecast:
         self.weekday = ''
         self.umbrella = False
 
+    # This method was created to get the data from the json the API returns and store in an object
+    # If avg is True, it means the data will be used to calculate the average and it won't come
+    # from in JSON format so it will be treated differently
     def set_data(self, data, avg):
         if avg:
             self.humidity.append(data.humidity[0])
@@ -48,6 +51,7 @@ class Forecast:
             self.pressure.append(data['main']['pressure'])
             self.weekday = get_weekday(date)
 
+    # This method sets the text attribute depending on the average humidity of the day.
     def get_rain_forecast(self):
 
         if self.avg_humidity == 0:

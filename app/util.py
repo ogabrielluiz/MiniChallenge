@@ -5,6 +5,7 @@ import requests
 from app import app
 
 
+# Builds the url to contact the OpenWeatherMap API and returns a list of json documents
 def get_weather():
     api_key = app.config['API_KEY']
     cidade = 'Ribeirão+Preto'
@@ -16,12 +17,15 @@ def get_weather():
     five_day_forecast = [x for x in data['list']]
     return five_day_forecast
 
-
+# Converts the data in UNIX format to Python's datetime format
 def convert_date(date):
     timestamp = int(date)
     date = datetime.utcfromtimestamp(timestamp)
     return date
 
+# Prepares the data to be accessed by the app, also gets the 40
+# observations(one every 3 hours per day) and joins all the data
+# into 5 observations, one for each day.
 
 def prepare_data(listed_data):
     prepared_data = []
@@ -43,7 +47,8 @@ def prepare_data(listed_data):
 
     return prepared_data
 
-
+# A list of observations is passed and the average of each type of data calculated
+# and set to their respective attribute.
 def set_avgs_on_all_days(data):
     for day in data:
         avg_humidity = sum(day.humidity) / len(day.humidity)
@@ -60,7 +65,7 @@ def set_avgs_on_all_days(data):
 
     return data
 
-
+# Gets the minimum and the maximum temperature for each day and sets them to their respective attribute.
 def set_max_min_temp(data):
     for day in data:
         lowest = min(day.temp_min)
@@ -77,7 +82,7 @@ def set_rain_forecast(data):
 
     return data
 
-
+# A function that receives a datetime object and returns the equivalent day of the week.
 def get_weekday(day):
     date = day.weekday()
     if date == 0:
